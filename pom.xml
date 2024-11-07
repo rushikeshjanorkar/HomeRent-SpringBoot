@@ -9,8 +9,8 @@
 	<packaging>jar</packaging>
 
 	<properties>
-		<java.version>19</java.version> <!-- Updated to Java 19 -->
-		<spring-boot.version>3.2.6</spring-boot.version> <!-- Use the latest stable version -->
+		<java.version>19</java.version>
+		<spring-boot.version>3.2.6</spring-boot.version>
 		<arg>-parameters</arg>
 	</properties>
 
@@ -91,6 +91,16 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+	<distributionManagement>
+		<repository>
+			<id>my-repo</id>
+			<url>http://my.repo.com/repository/maven-releases/</url>
+		</repository>
+	</distributionManagement>
+
+
+
 
 	<build>
 		<plugins>
