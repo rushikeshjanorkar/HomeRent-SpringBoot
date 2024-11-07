@@ -61,20 +61,20 @@ public class MonthlyBillController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/generate-pdf")
-    public ResponseEntity<byte[]> generateBillPdf(@RequestBody MonthalyBill bill) {
-        // Calculate bill first
-        MonthalyBill calculatedBill = createBill(bill);
-
-        // Generate PDF
-        byte[] pdfBytes = service.generateBillPdf(calculatedBill);
-
-        // Return PDF as a downloadable response
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=bill.pdf")
-                .contentType(MediaType.APPLICATION_PDF)
-                .body(pdfBytes);
-    }
+//    @PostMapping("/generate-pdf")
+//    public ResponseEntity<byte[]> generateBillPdf(@RequestBody MonthalyBill bill) {
+//        // Calculate bill first
+//        MonthalyBill calculatedBill = createBill(bill);
+//
+//        // Generate PDF
+//        byte[] pdfBytes = service.generateBillPdf(calculatedBill);
+//
+//        // Return PDF as a downloadable response
+//        return ResponseEntity.ok()
+//                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=bill.pdf")
+//                .contentType(MediaType.APPLICATION_PDF)
+//                .body(pdfBytes);
+//    }
 
 
 
