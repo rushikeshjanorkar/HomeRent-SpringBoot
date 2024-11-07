@@ -31,4 +31,6 @@ public class UserController {
         return ResponseEntity.ok("User Logged in successfully !!");
     }
 
+
+
 }
