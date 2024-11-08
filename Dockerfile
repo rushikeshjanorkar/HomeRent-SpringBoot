@@ -14,8 +14,14 @@ COPY . /app
 # Ensure Maven wrapper is executable
 RUN chmod +x ./mvnw
 
-# Verify Java version (optional)
+# Verify Java version
 RUN java -version
 
-# Run Maven build and install dependencies
+# Run Maven to install dependencies and clean up (Skip tests during the build process)
 RUN ./mvnw -DoutputFile=target/mvn-dependency-list.log -B -DskipTests clean dependency:list install
+
+# Expose port (if your application is a web service)
+EXPOSE 8080
+
+# Run the application (if it's a Spring Boot application)
+CMD ["./mvnw", "spring-boot:run"]
