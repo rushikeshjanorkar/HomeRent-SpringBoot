@@ -1,27 +1,18 @@
-# Use OpenJDK 19 base image
-FROM openjdk:19-jdk-slim
+# Set base image
+FROM openjdk:19
 
-# Set environment variables for Java
+# Set working directory
+WORKDIR /app
+
+# Copy files
+COPY . /app
+
+# Set JAVA_HOME (if needed)
 ENV JAVA_HOME=/usr/lib/jvm/java-19-openjdk-amd64
 ENV PATH=$JAVA_HOME/bin:$PATH
 
-# Set the working directory
-WORKDIR /app
+# Install Maven if not using Maven wrapper
+RUN apt-get update && apt-get install -y maven
 
-# Copy project files into the container
-COPY . /app
-
-# Ensure Maven wrapper is executable
-RUN chmod +x ./mvnw
-
-# Verify Java version
-RUN java -version
-
-# Run Maven to install dependencies and clean up (Skip tests during the build process)
-RUN ./mvnw -DoutputFile=target/mvn-dependency-list.log -B -DskipTests clean dependency:list install
-
-# Expose port (if your application is a web service)
-EXPOSE 8080
-
-# Run the application (if it's a Spring Boot application)
-CMD ["./mvnw", "spring-boot:run"]
+# Run Maven commands (skip tests)
+RUN mvn -DoutputFile=target/mvn-dependency-list.log -B -DskipTests clean dependency:list install
